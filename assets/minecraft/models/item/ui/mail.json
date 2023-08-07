@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:item/ui/root_guifront",
+  "textures": {
+    "texture": "custom/ui/mail"
+  }
+}
