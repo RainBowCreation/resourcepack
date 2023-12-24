@@ -38,5 +38,6 @@ do
     zip -qr "../${dir}/${zipped}.zip" *
     cd ..
 done
+echo "compressing bedrock version.."
 cp "${filename}.mcpack" "${dir}/"
 echo "done"
