@@ -9,7 +9,9 @@ mkdir "${dir}"
 list=(
     "pack.mcmeta"
     "pack.png"
-    "assets/minecraft/textures/gui"
+    "assets/minecraft/textures/gui/container/inventory.png"
+    "assets/minecraft/textures/gui/title/minecraft.png"
+    "assets/minecraft/textures/gui/title/edition.png"
 )
 CP() {
     mkdir -p $(dirname "$2") && cp -r "$1" "$2"
