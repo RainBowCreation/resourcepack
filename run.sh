@@ -3,32 +3,38 @@ filename="RainBowCreation"
 dir="target"
 lite="lite"
 prefix="v1_"
-mkdir $dir
-cd $dir
-echo "clearing old version"
-rm -rf *
-cd ..
-echo "compiling full version.."
-for V in 8 9 11 13 15 17 18 19 20
+support_versions=(8 9 11 13 15 17 18 19 20)
+rm -rf "${dir}"
+mkdir "${dir}"
+list=(
+    "pack.mcmeta"
+    "pack.png"
+    "assets/minecraft/textures/gui"
+)
+CP() {
+    mkdir -p $(dirname "$2") && cp -r "$1" "$2"
+}
+for V in "${support_versions[@]}"
 do
     file="${prefix}${V}"
-    zipped="${filename}_${file}.zip"
     echo "compressing ${file}..."
-    cd ${file}
-    zip -qr "../${dir}/$zipped" *
+    cd "${file}"
+    echo "create cache file for lite version.."
+    mkdir "${lite}"
+    for F in "${list[@]}"
+    do
+        echo "copying ${F}.."
+        CP  "${F}" "${lite}/${F}"
+    done
+    echo "compressing ${lite} of ${file}.."
+    cd "${lite}"
+    zipped="${filename}_${file}"
+    zip -qr "../../${dir}/${zipped}_${lite}.zip" *
+    cd ..
+    rm -rf "${lite}"
+    echo "compressing full version of ${file}.."
+    zip -qr "../${dir}/${zipped}.zip" *
     cd ..
 done
+cp "${filename}.mcpack" "${dir}/"
 echo "done"
-echo "compiling lite version"
-cd $lite
-for V in 8 9 11 13 15 17 18 19 20
-do
-    file="${prefix}${V}"
-    zipped="${filename}_${file}_${lite}.zip"
-    echo "compressing ${file}..."
-    cd ${file}
-    zip -qr "../../${dir}/$zipped" *
-    cd ..
-done
-cd ..
-echo "done :)
