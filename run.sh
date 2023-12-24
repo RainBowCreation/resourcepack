@@ -15,7 +15,7 @@ do
     zipped="${filename}_${file}.zip"
     echo "compressing ${file}..."
     cd ${file}
-    zip -r "../${dir}/$zipped" *
+    zip -qr "../${dir}/$zipped" *
     cd ..
 done
 echo "done"
@@ -27,7 +27,7 @@ do
     zipped="${filename}_${file}_${lite}.zip"
     echo "compressing ${file}..."
     cd ${file}
-    zip -r "../${dir}/$zipped" *
+    zip -qr "../../${dir}/$zipped" *
     cd ..
 done
 cd ..
