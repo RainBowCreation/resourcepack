@@ -32,8 +32,10 @@ CP() {
 }
 LI() {
     for F in "${1[@]}"
+    do
         echo "copying ${F}.."
         CP  "${F}" "${lite}/${F}"
+    done
 }
 for V in "${support_versions[@]}"
 do
