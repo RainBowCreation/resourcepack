@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:item/ui/root_guiback",
+  "textures": {
+    "texture": "custom/ui/template"
+  }
+}
