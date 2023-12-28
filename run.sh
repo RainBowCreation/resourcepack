@@ -31,7 +31,7 @@ CP() {
     mkdir -p $(dirname "$2") && cp -r "$1" "$2"
 }
 LI() {
-    for F in "${1[@]}"
+    for F in "${@}"
     do
         echo "copying ${F}.."
         CP  "${F}" "${lite}/${F}"
@@ -44,12 +44,12 @@ do
     cd "${file}"
     echo "create cache file for ${lite} version.."
     mkdir "${lite}"
-    LI "${list}"
-    if ${V} > 11
-        LI "${list_13}"
+    LI "${list[@]}"
+    if [ ${V} > 11 ]; then
+        LI "${list_13[@]}"
     fi
-    if ${V} > 18
-        LI "${list_19}"
+    if [ ${V} > 18 ]; then
+        LI "${list_19[@]}"
     fi
     echo "compressing ${lite} of ${file}.."
     cd "${lite}"
