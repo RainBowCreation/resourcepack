@@ -59,14 +59,17 @@ PR() {
     then
         echo "$1" >> "$2"
         cat "$2"
+        echo "${t_progress}" 
     else
         echo "$1" >> "${log}"
         cat "${log}"
+        echo "${t_progress}"
     fi
 }
 
 total_versions=${#support_versions[@]}
 current_version=0
+t_progress=''
 
 PRO() {
     ((current_version++))
@@ -81,8 +84,7 @@ PRO() {
         fi
     done
     progress+="] (${current_version}/${total_versions})"
-    RML
-    PR "${progress}"
+    t_progress="${progress}"
 }
 
 clear
@@ -97,6 +99,7 @@ mkdir "${tmp}"
 
 cd "${dir}"
 touch "${log}"
+cd ..
 
 echo "starting compile..."
 for V in "${support_versions[@]}"
@@ -110,26 +113,26 @@ do
     #
     file="${prefix}${V}"
     PR "compressing ${file}..."
-    cd "${file}"
+    # cd "${file}"
     PR "create cache file for ${lite} version.."
-    mkdir "${lite}"
-    LI "${list[@]}"
-    if [ "${V}" -gt 11 ]; then
-        LI "${list_13[@]}"
-    fi
-    if [ "${V}" -gt 18 ]; then
-        LI "${list_19[@]}"
-    fi
-    cd ${lite}
-    zipped="${filename}_${file}"
-    zip -qr "../../${dir}/${zipped}_${lite}.zip" *
-    cd ..
-    rm -rf "${lite}"
+    # mkdir "${lite}"
+    # LI "${list[@]}"
+    # if [ "${V}" -gt 11 ]; then
+    #     LI "${list_13[@]}"
+    # fi
+    # if [ "${V}" -gt 18 ]; then
+    #     LI "${list_19[@]}"
+    # fi
+    # cd ${lite}
+    # zipped="${filename}_${file}"
+    # zip -qr "../../${dir}/${zipped}_${lite}.zip" *
+    # cd ..
+    # rm -rf "${lite}"
     PR "compressing full version of ${file}.."
-    zip -qr "../${dir}/${zipped}.zip" *
-    cd ..
+    # zip -qr "../${dir}/${zipped}.zip" *
+    # cd ..
 done
 rm -rf "${tmp}"
 PR "compressing bedrock version.."
-cp "${filename}.mcpack" "${dir}/"
+# cp "${filename}.mcpack" "${dir}/"
 PR "done"
