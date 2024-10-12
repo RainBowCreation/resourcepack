@@ -1,4 +1,5 @@
 #!/bin/bash
+debug=false
 filename="RainBowCreation"
 dir="target"
 lite="lite"
@@ -87,6 +88,13 @@ PRO() {
     t_progress="${progress}"
 }
 
+DEP() {
+    if [ "${debug}" = true ]
+    then
+        read -p "Press enter to continue"
+    fi
+}
+
 clear
 echo "running..."
 echo "remove ${dir} dir."
@@ -129,12 +137,13 @@ do
     zip -qr "../../${dir}/${zipped}_${lite}.zip" *
     cd ..
     rm -rf "${lite}"
-    read -p "Press enter to continue"
+    DEP
     PR "compressing full version of ${file}.."
-    # CP  "../${logo}" "${file}/${logo}"
+    CP  "../${logo}" "../${file}/${logo}"
     zip -qr "../${dir}/${zipped}.zip" *
+    rm -rf "${logo}"
     cd ..
-    read -p "Press enter to continue"
+    DEP
 done
 # rm -rf "${tmp}"
 PR "compressing bedrock version.."
