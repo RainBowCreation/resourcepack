@@ -11,7 +11,8 @@ latest_release=$(curl -s "$API_URL")
 # Extract the tag name and download URLs of assets
 tag_name=$(echo "$latest_release" | grep -oP '"tag_name": "\K(.*?)(?=")')
 assets_urls=$(echo "$latest_release" | grep -oP '"browser_download_url": "\K(.*?)(?=")')
-
+# clear validator dir
+rm -rf "$validator_directory"
 # Create a directory for the release
 mkdir -p "$validator_directory"
 cd "$validator_directory" || exit
