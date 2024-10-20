@@ -1,5 +1,4 @@
 #!/bin/bash
-
 validator_directory="validator"
 target_directory="target"
 tmp_directory="tmp"
